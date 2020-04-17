@@ -26,7 +26,19 @@ public class Feed implements FeedInterface{
 	public FeedItem getItem(String title) {
 		return itens.stream().filter(i-> title.equalsIgnoreCase(i.getTitle())).findAny().get();
 	}
+	//(eu mudei para esse método de baixo)
+	public FeedItem getItem(String title) {
 
+		FeedItem feedFound = null;
+		int x = 0;
+		for (x = 0; x < itens.size(); x++) {
+			FeedItem fi = itens.get(x);
+			if (title.equalsIgnoreCase(fi.getTitle())) {
+				feedFound = fi;
+			}
+		}
+		return feedFound;
+	}
 	@Override
 	public int numItems() {
 		// TODO Auto-generated method stub
@@ -40,6 +52,18 @@ public class Feed implements FeedInterface{
 				.collect(Collectors.toList());
 	}
 	
-	
+	//Mudei para esse método de baixo 
+	public Collection<FeedItem> findItems(String keyword) {
+		Collection<FeedItem>listFound = new ArrayList<FeedItem>();
+		int x = 0;
+		for (x = 0; x < itens.size(); x++) {
+			FeedItem i = itens.get(x);
+			if(i.getTitle().contains(keyword)|| i.getContent().contains(keyword)) {
+				listFound.add(i);
+			}
+		}
+		return listFound;
+
+	}
 	
 }
