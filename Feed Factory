@@ -1,0 +1,17 @@
+public FeedInterface createFeed(BufferedReader in) throws IOException {
+		FeedInterface feed = new Feed();
+		while (in.ready()) {
+			try {
+
+				feed.addItem(new FeedItem(in.readLine(), in.readLine()));
+			}
+
+			catch (Exception e) {
+				// Catch exception if any
+				System.err.println("Error: " + e.getMessage());
+			}
+			
+		}
+		return feed;
+	}
+}
